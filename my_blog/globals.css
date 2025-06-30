@@ -1,0 +1,18 @@
+/* 添加全局过渡效果 */
+* {
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* 链接悬停效果 */
+a {
+  transition: all 0.2s ease;
+}
+
+/* 按钮点击效果 */
+button {
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
