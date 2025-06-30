@@ -43,11 +43,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, session) => {
+    } = supabase.auth.onAuthStateChange(async(_event, session: any) => {
       console.log("Auth state changed:", session?.user)
+      
       setUser(session?.user ?? null)
       setLoading(false)
+      if(session?.user.id) {
+        const {user_metadata} = session?.user || {};
+        console.log("User metadata:", user_metadata)
+        const {
+          avatar_url,
+          user_name
+        } = user_metadata || {};
+        await supabase.from('user_profiles').insert({ 
+          id: session?.user?.id,
+          username: user_name || 'Guest',
+          display_name: user_name || 'Guest User',
+          avatar_url,
+         }
+        )
+        
+      }
+      
     })
+  
 
     return () => {
       subscription.unsubscribe()
