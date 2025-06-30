@@ -171,19 +171,9 @@ export default function CreateBlogPost() {
   }
   
      
- const hanlerGetUserInfo = async () => {
-  // 初始化时检查用户状态
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        console.log('当前用户信息:', session)
-      })
-}
-
   return (
     <div className="container mx-auto px-4 py-8">
       <Card className="max-w-3xl mx-auto">
-        <div onClick={hanlerGetUserInfo}>
-          dianji 查看信息
-        </div>
         <CardHeader>
           <CardTitle>创建新文章</CardTitle>
         </CardHeader>
